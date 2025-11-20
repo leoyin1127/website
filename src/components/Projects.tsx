@@ -1,13 +1,25 @@
-import React from 'react';
+'use client';
+
+import React, { useMemo, useState } from 'react';
 import { PROJECTS } from '../constants';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, X } from 'lucide-react';
+import { ProjectItem } from '../types';
 
 const Projects: React.FC = () => {
+    const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
+    const activeProject = useMemo<ProjectItem | null>(
+        () => PROJECTS.find((p) => p.id === activeProjectId) || null,
+        [activeProjectId]
+    );
+
+    const openDetails = (projectId: string) => setActiveProjectId(projectId);
+    const closeDetails = () => setActiveProjectId(null);
+
     return (
         <section id="projects" className="py-24 px-6 md:px-12 border-b border-zinc-900">
             <div className="max-w-[1800px] mx-auto">
                 <div className="mb-20">
-                    <h2 className="text-6xl md:text-8xl font-black text-white tracking-tighter mb-6">WORK.</h2>
+                    <h2 className="text-6xl md:text-8xl font-black text-white tracking-tighter mb-6">PROJECTS.</h2>
                     <div className="h-1 w-24 bg-brand-accent"></div>
                 </div>
 
@@ -45,7 +57,10 @@ const Projects: React.FC = () => {
                                         <p className="text-zinc-300 leading-relaxed max-w-md">
                                             {project.description[0]}
                                         </p>
-                                        <button className="mt-6 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-brand-accent hover:text-white transition-colors">
+                                        <button
+                                            className="mt-6 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-brand-accent hover:text-white transition-colors"
+                                            onClick={() => openDetails(project.id)}
+                                        >
                                             View Details <ArrowUpRight className="w-4 h-4" />
                                         </button>
                                     </div>
@@ -58,6 +73,45 @@ const Projects: React.FC = () => {
                     ))}
                 </div>
             </div>
+
+            {/* Details Overlay */}
+            {activeProject && (
+                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center px-4">
+                    <div className="relative max-w-4xl w-full bg-zinc-900 border border-zinc-800 p-8 md:p-10 shadow-2xl">
+                        <button
+                            aria-label="Close"
+                            className="absolute top-4 right-4 text-zinc-500 hover:text-white transition-colors"
+                            onClick={closeDetails}
+                        >
+                            <X />
+                        </button>
+
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
+                            <div>
+                                <p className="text-sm font-mono text-zinc-500">{activeProject.role}</p>
+                                <h3 className="text-3xl md:text-4xl font-bold text-white">{activeProject.title}</h3>
+                            </div>
+                            <span className="font-mono text-xs text-zinc-500">{activeProject.period}</span>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 mb-6">
+                            {activeProject.tags.map((tag) => (
+                                <span key={tag} className="text-[11px] font-mono uppercase tracking-wider border border-zinc-700 px-3 py-1 text-zinc-300">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+
+                        <ul className="space-y-3 text-zinc-300 leading-relaxed">
+                            {activeProject.description.map((line, idx) => (
+                                <li key={idx} className="border-l-2 border-zinc-800 pl-4">
+                                    {line}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };

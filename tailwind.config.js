@@ -21,8 +21,8 @@ module.exports = {
             },
             animation: {
                 'spin-slow': 'spin 12s linear infinite',
-                'marquee': 'marquee 25s linear infinite',
-                'marquee-reverse': 'marquee-reverse 25s linear infinite',
+                'marquee': 'marquee 40s linear infinite',
+                'marquee-reverse': 'marquee-reverse 40s linear infinite',
             },
             keyframes: {
                 marquee: {
