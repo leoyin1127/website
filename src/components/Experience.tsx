@@ -1,164 +1,89 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import Image from 'next/image';
+import React, { useState } from 'react';
+import { EXPERIENCES } from '../constants';
+import { Plus, Minus } from 'lucide-react';
 
-// Define interface for experience items
-interface ExperienceItem {
-    title: string;
-    company: string;
-    location: string;
-    period: string;
-    logo?: string | null;
-    description: string[];
-}
-
-const Experience = () => {
-    const [ref, inView] = useInView({
-        triggerOnce: true,
-        threshold: 0.1,
-    });
-
-    const experienceData: ExperienceItem[] = [
-        {
-            title: 'Research Assistant',
-            company: 'The Institute of Automation, Chinese Academy of Sciences (CASIA)',
-            location: 'Beijing, China',
-            period: 'Feb 2024 - Sep 2024',
-            logo: null,
-            description: [
-                'Streamlined research on Multimodal Large Language Models (MLLMs) through systematic literature review and novel experimental design, developing methodology for MICCAI 2025 submission',
-                'Engineered an end-to-end data pipeline for benchmark creation using Python, incorporating automated quality checks and custom annotation tools, resulting in a 75% reduction in processing time and 40% improvement in annotation accuracy',
-                'Developed a multimodal evaluation framework using PyTorch, benchmarking state-of-the-art MLLMs across multiple dimensions with metrics for accuracy, robustness, and cross-modal consistency',
-                'Spearheaded weekly technical discussions and authored comprehensive research documentation, facilitating knowledge transfer across interdisciplinary teams of vertical category experts and ML researchers'
-            ]
-        },
-        {
-            title: 'President/Founder',
-            company: 'VolunTrack Org.',
-            location: 'Toronto, ON',
-            period: 'Jun 2022 - Sep 2024',
-            logo: null,
-            description: [
-                'Founded and scaled a non-profit organization through a structured four-tier management system, growing the company to 50+ members and establishing partnerships with 100+ global non-profits',
-                'Architected an ML-powered volunteer matching system using TensorFlow and scikit-learn, achieving 85% matching accuracy and reducing manual matching time by 70%',
-                'Developed a full-stack volunteer platform with React Native and React.js, integrating MLOps practices and employing a CI/CD pipeline to ensure consistent and robust application builds, serving 1000+ monthly active users',
-                'Implemented real-time analytics using Google Cloud Platform, Cloud Firestore, and TensorFlow.js, deploying ML models for volunteer engagement prediction and churn analysis across 100+ organizations',
-                'Established an AI innovation program, leading to 30+ successful ML projects and 10+ conference speaking engagements'
-            ]
-        },
-        {
-            title: 'AI Engineering Lead / Co-Founder',
-            company: 'YiXing - AI-Driven Personalized Travel Planner',
-            location: 'Toronto, ON',
-            period: 'Jun 2023 - May 2024',
-            logo: null,
-            description: [
-                'Architected and deployed a production-grade LLM system with fine-tuned GPT-based models, training on 1,000+ curated travel itineraries to achieve an 85% user satisfaction rate based on post-trip feedback',
-                'Engineered a RAG pipeline processing 5000+ travel documents using LangChain, Pinecone vector DB, and custom chunking strategies, improving travel suggestion accuracy by 35% and reducing waiting time by 90%',
-                'Developed serverless APIs using AWS Lambda to handle LLM integration, user data management, and travel preference processing for the React Native frontend',
-                'Led a team of 6, implementing A/B testing and performance monitoring to continuously improve the fine-tuned model'
-            ]
-        },
-        {
-            title: 'AI/ML Project Lead',
-            company: 'ReassurED - AI-Powered Emergency Care Guidance/Navigator',
-            location: 'Montreal, QC',
-            period: 'Jan 2025',
-            description: [
-                'Architected an AI-powered healthcare system using Deepseek-v3, React Native (Expo) and integrated real-time hospital data via Firestore, achieving 90% alignment with the standard Emergency Severity Index during a 24-hour hackathon',
-                'Implemented few-shot learning through medical examples, JSON schema validation, and chain-of-thought reasoning prompt engineering, reducing incorrect classifications by 25% compared to a zero-shot baseline',
-                'Developed a hybrid recommendation system combining LLM outputs with a weighting algorithm for hospital suggestions, integrating real-time wait times, distance metrics, and facility capabilities, reducing user decision time by 70%',
-                'Built a scalable FastAPI backend processing 100+ concurrent requests per second, enabling real-time integration between the LLM service and the hospital data system with 99% uptime'
-            ]
-        },
-        {
-            title: 'Web Team Associate',
-            company: 'IEEE UofT',
-            location: 'Toronto, ON',
-            period: 'Jun 2024 - Present',
-            description: [
-                'Developed and maintained full-stack web applications with a React.js frontend and Django backend, enhancing IEEE UofT\'s main website and event platforms with a responsive, user-friendly design',
-                'Improved performance by optimizing APIs and caching, reducing load times and enhancing user experience',
-                'Collaborated within an Agile team to build and deploy new features, ensuring a seamless experience'
-            ]
-        }
-    ];
+const Experience: React.FC = () => {
+    const [openId, setOpenId] = useState<string | null>(EXPERIENCES[0].id);
 
     return (
-        <section id="experience" className="py-20">
-            <div className="section-container">
-                <motion.div
-                    ref={ref}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    transition={{ duration: 0.6, ease: 'easeOut' }}
-                    className="max-w-3xl mx-auto text-center mb-16"
-                >
-                    <h2 className="subheading mb-4">Work Experience</h2>
-                    <div className="w-24 h-1 bg-secondary mx-auto mb-8"></div>
-                    <p className="text-lg text-gray-600 dark:text-gray-300">
-                        My professional journey through research, entrepreneurship, and development
+        <section id="experience" className="py-24 px-6 md:px-12 border-b border-zinc-900">
+            <div className="max-w-[1800px] mx-auto">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-16">
+                    <h2 className="text-6xl md:text-8xl font-black text-white tracking-tighter">EXP.</h2>
+                    <p className="font-mono text-zinc-500 text-right mt-4 md:mt-0">
+                        PROFESSIONAL HISTORY<br />
+                        & RESEARCH
                     </p>
-                </motion.div>
+                </div>
 
-                <div className="relative max-w-4xl mx-auto">
-                    {/* Timeline line */}
-                    <div className="absolute left-0 md:left-1/2 top-0 h-full w-px bg-gray-300 dark:bg-gray-700 transform md:-translate-x-px"></div>
+                <div className="border-t border-zinc-800">
+                    {EXPERIENCES.map((exp) => {
+                        const isOpen = openId === exp.id;
+                        return (
+                            <div
+                                key={exp.id}
+                                className={`border-b border-zinc-800 transition-colors duration-500 ${isOpen ? 'bg-zinc-900/20' : 'hover:bg-zinc-900/10'}`}
+                            >
+                                <button
+                                    onClick={() => setOpenId(isOpen ? null : exp.id)}
+                                    className="w-full py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-left group outline-none"
+                                >
+                                    <div className="flex items-center gap-6 md:w-1/3">
+                                        <span className={`font-mono text-xs ${isOpen ? 'text-brand-accent' : 'text-zinc-600'}`}>
+                                            0{EXPERIENCES.indexOf(exp) + 1}
+                                        </span>
+                                        <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-brand-accent transition-colors">
+                                            {exp.role}
+                                        </h3>
+                                    </div>
 
-                    {/* Experience Items */}
-                    {experienceData.map((job: ExperienceItem, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                            transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
-                            className={`relative mb-8 md:mb-10 ${index % 2 === 0 ? 'md:pr-6 md:text-right md:ml-0 md:mr-auto' : 'md:pl-6 md:ml-auto md:mr-0'
-                                } md:w-1/2`}
-                        >
-                            {/* Mobile dot - only visible on small screens, but kept for mobile layout */}
-                            <div className="absolute left-0 top-6 w-3 h-3 rounded-full bg-gray-400 z-10 
-                               border-2 border-white dark:border-slate-900 md:hidden -translate-x-1/2"
-                            ></div>
+                                    <div className="md:w-1/3 text-zinc-400 text-sm md:text-base font-medium">
+                                        {exp.company}
+                                    </div>
 
-                            <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6 ml-8 md:ml-0 relative">
-                                <span className="bg-secondary/10 text-secondary font-medium text-sm px-3 py-1 rounded-full">
-                                    {job.period}
-                                </span>
-                                <h3 className="text-xl font-bold mt-4">{job.title}</h3>
-
-                                {/* Display logo if available */}
-                                {job.logo && (
-                                    <div className="mt-3 mb-2 flex justify-center md:justify-start">
-                                        <div className="w-20 h-10 relative">
-                                            <Image
-                                                src={job.logo}
-                                                alt={`${job.company} logo`}
-                                                fill
-                                                className="object-contain"
-                                            />
+                                    <div className="md:w-1/4 flex items-center justify-between md:justify-end gap-8">
+                                        <span className="font-mono text-xs text-zinc-500">{exp.period}</span>
+                                        <div className={`text-brand-accent transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                                            {isOpen ? <Minus /> : <Plus />}
                                         </div>
                                     </div>
-                                )}
+                                </button>
 
-                                <div className="text-gray-600 dark:text-gray-400 mt-1 mb-4">
-                                    <span>{job.company}</span>
-                                    <span className="mx-2">•</span>
-                                    <span>{job.location}</span>
+                                <div
+                                    className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[800px] opacity-100 mb-8' : 'max-h-0 opacity-0'
+                                        }`}
+                                >
+                                    <div className="md:grid md:grid-cols-3 gap-8 pt-4">
+                                        <div className="col-start-2 col-span-2 space-y-6">
+                                            <ul className="space-y-3">
+                                                {exp.description.map((desc, i) => (
+                                                    <li key={i} className="text-zinc-300 leading-relaxed text-lg font-light border-l-2 border-zinc-800 pl-4">
+                                                        {desc}
+                                                    </li>
+                                                ))}
+                                            </ul>
+
+                                            {exp.techStack && (
+                                                <div className="flex flex-wrap gap-2 pt-4">
+                                                    {exp.techStack.map((tech) => (
+                                                        <span key={tech} className="px-3 py-1 text-xs font-mono text-black bg-white hover:bg-brand-accent transition-colors">
+                                                            {tech}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul className="list-disc text-gray-600 dark:text-gray-300 text-sm space-y-2 pl-5">
-                                    {job.description.map((item, i) => (
-                                        <li key={i}>{item}</li>
-                                    ))}
-                                </ul>
                             </div>
-                        </motion.div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </section>
     );
 };
 
-export default Experience; 
+export default Experience;
