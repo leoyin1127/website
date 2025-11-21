@@ -40,6 +40,24 @@ Skills:
 
 export const EXPERIENCES: ExperienceItem[] = [
     {
+        id: 'medical3',
+        role: 'Co-Founder, Chief Technology Officer',
+        company: 'Medical3 Inc.',
+        location: 'Toronto, ON',
+        period: 'March 2025 – Present',
+        techStack: ['Multi-Agent Systems', 'MCP Tooling', 'RAG', 'Vector/Hybrid Search', 'MLOps/CI-CD'],
+        description: [
+            'Lead technical strategy and delivery of a purpose-built AI commercial engine for medical devices across ingestion, retrieval, reasoning, and automated outreach.',
+            'Design a multi-agent system with MCP-based tool routing, secure enterprise connectors, audit logs, telemetry, and failure isolation for resilient integrations.',
+            'Develop a compliance-first RAG stack with approved-source retrieval, automatic citations, and guardrails aligned to medical device regulatory and marketing constraints.',
+            'Build document understanding for complex medical layouts (tables, symbols, multi-column, multilingual labeling) and scale OCR throughput via cloud batching and pipeline parallelism.',
+            'Implement retrieval optimizations (vector indexing, hybrid search, reranking, prompt-retrieval co-design) to improve factuality and traceability.',
+            'Train and deploy a compact outreach SLM on proprietary high-conversion data for high-precision personalization with minimal inference cost.',
+            'Establish the production ML platform: model CI/CD, offline-to-online eval parity, drift detection, A/B experimentation, and tight customer feedback loops.',
+            'Own and manage the engineering roadmap, aligning model research, reliability, and product milestones across early customers and pilots.'
+        ]
+    },
+    {
         id: 'vector',
         role: 'Undergraduate Researcher',
         company: 'Vector Institute & University Health Network — WangLab',
@@ -135,18 +153,6 @@ export const PROJECTS: ProjectItem[] = [
             'Implemented dynamic triage and recommendation system with few-shot learning on Deepseek-v3 and custom weighting.',
             'Built a FastAPI backend with scraping and automated data updates for hospital availability.',
             'Enhanced UX with location-based hospital maps via react-native-maps and expo-location.'
-        ]
-    },
-    {
-        id: 'ieee',
-        title: 'IEEE UofT – Web Team Associate',
-        role: 'Full-Stack Developer',
-        period: 'Jun 2024 – Present',
-        tags: ['React.js', 'Django', 'API Optimization', 'Caching', 'UI/UX'],
-        description: [
-            'Develop and maintain full-stack web applications with a React.js frontend and Django backend for IEEE UofT.',
-            'Optimize APIs and implement caching strategies to reduce load times and improve user experience.',
-            'Collaborate in an Agile team to deliver new features and ensure a seamless cross-platform experience.'
         ]
     }
 ];

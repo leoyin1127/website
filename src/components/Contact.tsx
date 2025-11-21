@@ -39,7 +39,6 @@ const Contact: React.FC = () => {
                 <div className="flex flex-col md:flex-row justify-between items-end pt-8 border-t border-zinc-900">
                     <div className="text-zinc-600 text-xs font-mono mb-4 md:mb-0">
                         DESIGNED & ENGINEERED BY LEO YIN<br />
-                        POWERED BY GEMINI AI
                     </div>
                     <div className="text-zinc-600 text-xs font-mono">
                         © 2025 ALL RIGHTS RESERVED
