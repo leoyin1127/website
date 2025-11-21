@@ -28,7 +28,7 @@ const Experience: React.FC = () => {
                             >
                                 <button
                                     onClick={() => setOpenId(isOpen ? null : exp.id)}
-                                    className="w-full py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-left group outline-none"
+                                    className="hover-target w-full py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 text-left group outline-none"
                                 >
                                     <div className="flex items-center gap-6 md:w-1/3">
                                         <span className={`font-mono text-xs ${isOpen ? 'text-brand-accent' : 'text-zinc-600'}`}>
@@ -55,11 +55,11 @@ const Experience: React.FC = () => {
                                     className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[800px] opacity-100 mb-8' : 'max-h-0 opacity-0'
                                         }`}
                                 >
-                                    <div className="md:grid md:grid-cols-3 gap-8 pt-4">
+                                    <div className="md:grid md:grid-cols-3 gap-8 pt-4 pl-4 md:pl-0">
                                         <div className="col-start-2 col-span-2 space-y-6">
                                             <ul className="space-y-3">
                                                 {exp.description.map((desc, i) => (
-                                                    <li key={i} className="text-zinc-300 leading-relaxed text-lg font-light border-l-2 border-zinc-800 pl-4">
+                                                    <li key={i} className="text-zinc-300 leading-relaxed text-lg font-light border-l-2 border-zinc-800 pl-4 hover:border-brand-accent transition-colors">
                                                         {desc}
                                                     </li>
                                                 ))}
@@ -68,7 +68,7 @@ const Experience: React.FC = () => {
                                             {exp.techStack && (
                                                 <div className="flex flex-wrap gap-2 pt-4">
                                                     {exp.techStack.map((tech) => (
-                                                        <span key={tech} className="px-3 py-1 text-xs font-mono text-black bg-white hover:bg-brand-accent transition-colors">
+                                                        <span key={tech} className="px-3 py-1 text-xs font-mono text-black bg-white hover:bg-brand-accent transition-colors cursor-default">
                                                             {tech}
                                                         </span>
                                                     ))}

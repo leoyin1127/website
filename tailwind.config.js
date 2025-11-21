@@ -21,8 +21,10 @@ module.exports = {
             },
             animation: {
                 'spin-slow': 'spin 12s linear infinite',
-                'marquee': 'marquee 40s linear infinite',
-                'marquee-reverse': 'marquee-reverse 40s linear infinite',
+                'marquee': 'marquee 25s linear infinite',
+                'marquee-reverse': 'marquee-reverse 25s linear infinite',
+                'glitch': 'glitch 1s linear infinite',
+                'scanline': 'scanline 8s linear infinite',
             },
             keyframes: {
                 marquee: {
@@ -32,6 +34,15 @@ module.exports = {
                 'marquee-reverse': {
                     '0%': { transform: 'translateX(-100%)' },
                     '100%': { transform: 'translateX(0%)' },
+                },
+                glitch: {
+                    '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
+                    '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
+                    '62%': { transform: 'translate(0,0) skew(5deg)' },
+                },
+                scanline: {
+                    '0%': { transform: 'translateY(-100%)' },
+                    '100%': { transform: 'translateY(100%)' },
                 }
             }
         },

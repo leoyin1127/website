@@ -5,11 +5,14 @@ import Projects from '../components/Projects';
 import Skills from '../components/Skills';
 import Contact from '../components/Contact';
 import ChatWidget from '../components/ChatWidget';
+import CustomCursor from '../components/CustomCursor';
 
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-black text-zinc-300">
+      <CustomCursor />
       <div className="noise-bg"></div>
+      <div className="scanlines"></div>
       <Navbar />
       <main className="relative z-10">
         <Hero />
